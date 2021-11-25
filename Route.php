@@ -1,10 +1,14 @@
 <?php
 
+use src\Helper;
+
 class Route{
     public static function execute()
     {
-        $url_path = str_replace('?'.$_SERVER['QUERY_STRING'], '', $_SERVER['REQUEST_URI']);
-        $url_path = substr($url_path, 1, strlen($url_path));
+        $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        $actual_link = str_replace(Helper::base_url(), '', $actual_link);
+        $url_path = str_replace('?'.$_SERVER['QUERY_STRING'], '', $actual_link);
+        
         $url_path_ar = explode('/', $url_path);
 
         $module = 'front';

@@ -9,3 +9,4 @@ require 'Route.php';
 Autoloader::register();
 
 Route::execute();
+
