@@ -4,16 +4,24 @@ namespace src;
 class Helper
 {
     public static function ViewRender($module, $view, $param) {
+       // print_r($module);exit;
         foreach ($param as $key => $value) {
             $$key = $value;
         }
 
         $view = "src/$module/views/$view.php";
 
-        ob_start();
-            require_once "src/layouts/$module.php";
-        $page = ob_get_contents();
-        ob_end_clean();
+   // print_r(1);exit;
+    ob_start();
+        if($view == 'src/backend/views/login/auth.php'){
+            require_once "src/$module/views/login/auth.php";
+        }else{
+            require_once "src/$module/views/layouts/template.php";
+        }
+    $page = ob_get_contents();
+    ob_end_clean();
+
+
 
         echo $page;
     }
@@ -39,5 +47,13 @@ class Helper
         }
 
         return $base_url;
+    }
+
+    public static function showSession($index) {
+        if (!isset($_SESSION[$index])) return null;
+
+        $msg = $_SESSION[$index];
+        unset($_SESSION[$index]);
+        return $msg;
     }
 }

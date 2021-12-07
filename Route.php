@@ -11,7 +11,7 @@ class Route{
         
         $url_path_ar = explode('/', $url_path);
 
-        $module = 'front';
+        $module = 'frontend';
         if (count($url_path_ar) == 1) {
             $controller = ucfirst($url_path_ar[0]) . 'Controller';
             $action = 'index';
@@ -24,6 +24,10 @@ class Route{
             $module = $url_path_ar[0];
             $controller = ucfirst($url_path_ar[1]) . 'Controller';
             $action = $url_path_ar[2];
+        }
+
+        if ($module == "backend" && $controller != 'LoginController' && !isset($_SESSION['sess_user_id'])) {
+            header('Location:' . Helper::base_url() . 'backend/login/index');exit;
         }
 
         $class = "src\\$module\\controllers\\" . $controller;
