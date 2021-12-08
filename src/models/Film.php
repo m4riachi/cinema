@@ -169,6 +169,35 @@ class Film
         }
         return $ar_film;
     }
+    public function getFilmDetailsById($id){
+        $films = $this->db->query("SELECT films.id,film_genre.genre_id,films.titre,films.description,films.annee,films.bande_annonce_url,gallery.id as gallery_id,horaires.id as horaire_id,gallery.photo as photo,genres.nom as nom, horaires.date as date
+            FROM films 
+                INNER JOIN horaires on films.id = horaires.film_id
+                INNER JOIN gallery on films.id = gallery.film_id
+                INNER JOIN film_genre on films.id = film_genre.film_id
+                INNER JOIN genres on genres.id = film_genre.genre_id 
+            where films.id = ".$id);
+        $ar_film = [];
+        while ($film = $films->fetch()) {
+            if (!isset($ar_film[$film['id']])){
+                $ar_film[$film['id']] = [
+                    'id' => $film['id'],
+                    'titre' => $film['titre'],
+                    'description' => $film['description'],
+                    'annee' => $film['annee'],
+                    'bande_annonce_url'=> $film['bande_annonce_url'],
+                    'photos' => [],
+                    'genres' => [],
+                    'horaires' => [],
+                ];
+            }
+            $ar_film[$film['id']]['photos'][$film['gallery_id']]= ['id' => $film['gallery_id'], 'photo' => $film['photo']];
+            $ar_film[$film['id']]['genres'][$film['genre_id']] = ['id' => $film['genre_id'], 'nom' => $film['nom']];
+            $ar_film[$film['id']]['horaires'][] = ['id' => $film['horaire_id'], 'date' => $film['date']];
+        }
+
+        return $ar_film;
+    }
 
     public function insert($genres,$titre,$description,$annee,$bande_annonce_url ){
 

@@ -14,7 +14,7 @@ class Route{
         $module = 'frontend';
         if (count($url_path_ar) == 1) {
             $controller = ucfirst($url_path_ar[0]) . 'Controller';
-            $action = 'index';
+            header('Location:' . Helper::base_url() . 'frontend/home/index');exit;
         }
         else if (count($url_path_ar) == 2) {
             $controller = ucfirst($url_path_ar[0]) . 'Controller';

@@ -26,13 +26,13 @@
                                     </a>
                                 </div>
                                 <h4 class="entity-title">
-                                    <a class="content-link" href="movie-info-sidebar-right.html"><?= $data['titre'] ?></a>
+                                    <a class="content-link" href="<?=\src\Helper::base_url()?>frontend/film/details?id=<?= $data['id'] ?>"><?= $data['titre'] ?></a>
                                 </h4>
                                 <div class="entity-category">
                                    <?php
                                    $length = count($data['genres']);
                                    foreach ($data['genres'] as $key => $genre) { ?>
-                                           <a class="content-link" href = "movies-blocks.html" > <?= $genre['nom'] ?></a> <?php if ($key !== array_key_last($data['genres'])) echo ',' ?>
+                                           <span class="content-link" style="color: #ff8a00;" > <?= $genre['nom'] ?></span> <?php if ($key !== array_key_last($data['genres'])) echo ',' ?>
                                        <?php
                                      }
                                     ?>
@@ -123,13 +123,13 @@
             </div>
             <div class="entity-content">
                 <h4 class="entity-title">
-                    <a class="content-link" href="movie-info-sidebar-right.html"><?= htmlspecialchars($data['titre'])?></a>
+                    <a class="content-link" href="<?=\src\Helper::base_url()?>frontend/film/details?id=<?= $data['id'] ?>""><?= htmlspecialchars($data['titre'])?></a>
                 </h4>
                 <div class="entity-category">
                     <?php
                     $length = count($data['genres']);
                     foreach ($data['genres'] as $key => $genre) { ?>
-                    <a class="content-link" href="movies-blocks.html"><?= $genre['nom'] ?></a> <?php if ($key !== array_key_last($data['genres'])) echo ',' ?>
+                    <span class="content-link" style="color: #ff8a00;" > <?= $genre['nom'] ?></span> <?php if ($key !== array_key_last($data['genres'])) echo ',' ?>
                     <?php }   ?>
                 </div>
                 <div class="entity-info">
@@ -200,14 +200,14 @@
                         </div>
                         <div class="entity-content">
                             <h4 class="entity-title">
-                                <a class="content-link" href="movie-info-sidebar-right.html"><?= htmlspecialchars($film_soon['titre'])?></a>
+                                <a class="content-link" href="<?=\src\Helper::base_url()?>frontend/film/details?id=<?= $data['id'] ?>""><?= htmlspecialchars($film_soon['titre'])?></a>
                             </h4>
                             <div class="entity-category">
                                 <?php
                                 $length = count($film_soon['genres']);
 
                                 foreach ($film_soon['genres'] as $key => $genre) { ?>
-                                <a class="content-link" href="movies-blocks.html"><?= $genre['nom'] ?></a> <?php if ($key !== array_key_last($film_soon['genres'])) echo ',' ?>
+                                <span class="content-link" style="color: #ff8a00;" > <?= $genre['nom'] ?></span> <?php if ($key !== array_key_last($film_soon['genres'])) echo ',' ?>
                                 <?php } ?>
                             </div>
                             <div class="entity-info">
