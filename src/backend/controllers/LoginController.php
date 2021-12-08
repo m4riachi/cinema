@@ -46,9 +46,10 @@ class LoginController
     }
     public function logout()
     {
-        Helper::ViewRender('backend', 'login/auth', [
-            'title' => 'Login',
-        ]);
+        unset($_SESSION['sess_user_id']);
+        unset($_SESSION['sess_user_name']);
+        header('Location:' . Helper::base_url() . 'backend/login/index');
+
     }
 
 }
